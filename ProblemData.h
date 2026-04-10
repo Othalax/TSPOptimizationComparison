@@ -18,11 +18,9 @@ public:
 
 	int getDimension() const;
 	std::string getEdgeWeightType() const;
-	int getNumGroups() const;
 
 	void setDimension(int _dimension);
 	void setEdgeWeightType(const std::string& _type);
-	void setNumGroups(int _numGroups);
 	void setCoordinates(const std::vector<Coordinate>& _coordinates);
 	void setName(std::string _name);
 
@@ -32,7 +30,6 @@ private:
 	std::string name;
 	int dimension;
 	std::string edgeWeightType;
-	int numGroups;
 
 	std::vector<Coordinate> coordinates;
 };

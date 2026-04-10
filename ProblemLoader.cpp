@@ -1,14 +1,14 @@
 #include "ProblemLoader.h"
 
 
-ProblemLoader::ProblemLoader(const std::string& filepath)
+ProblemLoader::ProblemLoader(const std::string& _filepath)
     : filepath(filepath) {
 }
 
-ProblemData ProblemLoader::LoadProblem() {
-    ProblemData problem_data;
+ProblemData ProblemLoader::loadProblem() {
+    ProblemData problemdata;
 
-    ParseTSPFile(filepath, problem_data);
+    parseTSPFile(filepath, problemdata);
 
     /*int num_customers = problem_data.getNumGroups() - 1;
     std::vector<int> permutation;
@@ -22,16 +22,16 @@ ProblemData ProblemLoader::LoadProblem() {
     shuffle(permutation.begin(), permutation.end(), gen);*/
 
 
-    return problem_data;
+    return problemdata;
 }
 
-void ProblemLoader::ParseTSPFile(const std::string& file_path, ProblemData& problem_data)
+void ProblemLoader::parseTSPFile(const std::string& _filepath, ProblemData& _problemdata)
 {
     std::ifstream file;
     try {
-        file.open(file_path);
+        file.open(_filepath);
         if (!file.is_open()) {
-            throw std::invalid_argument("Error: Cannot open file: " + file_path);
+            throw std::invalid_argument("Error: Cannot open file: " + _filepath);
         }
     }
     catch (const std::invalid_argument& e) {
@@ -45,40 +45,40 @@ void ProblemLoader::ParseTSPFile(const std::string& file_path, ProblemData& prob
         if (token == "DIMENSION") {
             int dim;
             file >> colon >> dim;
-            problem_data.setDimension(dim);
+            _problemdata.setDimension(dim);
         }
         else if (token == "EDGE_WEIGHT_TYPE") {
             std::string type;
             file >> colon >> type;
-            problem_data.setEdgeWeightType(type);
+            _problemdata.setEdgeWeightType(type);
         }
         else if (token == "NODE_COORD_SECTION") {
-            ParseNodeCoordSection(file, problem_data);
+            parseNodeCoordSection(file, _problemdata);
         }
     }
 
     file.close();
 
-    if (problem_data.isDataIncomplete())
+    if (_problemdata.isDataIncomplete())
     {
         throw std::invalid_argument("Error: Something wrong with the file");
     }
 
 }
 
-void ProblemLoader::ParseNodeCoordSection(std::ifstream& file, ProblemData& problem_data) {
-    int dimension = problem_data.getDimension();
+void ProblemLoader::parseNodeCoordSection(std::ifstream& _file, ProblemData& _problemdata) {
+    int dimension = _problemdata.getDimension();
     std::vector<Coordinate> coordinates(dimension);
 
     int id;
     double x, y;
 
     for (int i = 0; i < dimension; ++i) {
-        file >> id >> x >> y;
+        _file >> id >> x >> y;
         if (id >= 1 && id <= dimension) {
             coordinates[id - 1] = Coordinate(x, y);
         }
     }
 
-    problem_data.setCoordinates(coordinates);
+    _problemdata.setCoordinates(coordinates);
 }

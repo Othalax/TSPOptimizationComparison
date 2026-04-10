@@ -4,8 +4,7 @@
 
 ProblemData::ProblemData()
     : dimension(0),
-    edgeWeightType(""),
-    numGroups(0) {
+    edgeWeightType(""){
 }
 
 int ProblemData::getDimension() const
@@ -16,11 +15,6 @@ int ProblemData::getDimension() const
 std::string ProblemData::getEdgeWeightType() const
 {
     return edgeWeightType;
-}
-
-int ProblemData::getNumGroups() const
-{
-    return numGroups;
 }
 
 void ProblemData::setDimension(int _dimension)
@@ -34,10 +28,6 @@ void ProblemData::setEdgeWeightType(const std::string& _type)
     edgeWeightType = _type;
 }
 
-void ProblemData::setNumGroups(int _numGroups)
-{
-    numGroups = _numGroups;
-}
 void ProblemData::setCoordinates(const std::vector<Coordinate>& _coordinates)
 {
     coordinates = _coordinates;
@@ -68,7 +58,6 @@ double ProblemData::calculateDistance(int i, int j) const {
 
 bool ProblemData::isDataIncomplete()
 {
-    return dimension == 0 || edgeWeightType == "" ||
-        numGroups == 0 || coordinates.size() != dimension;
+    return dimension == 0 || edgeWeightType == "" || coordinates.size() != dimension;
 }
 

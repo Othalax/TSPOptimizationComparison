@@ -10,17 +10,14 @@
 
 class ProblemLoader {
 public:
-	ProblemLoader(const std::string& filepath);
+	ProblemLoader(const std::string& _filepath);
 
-	ProblemData LoadProblem();
+	ProblemData loadProblem();
 
 private:
 	std::string filepath;
 
-	void ParseTSPFile(const std::string& file_path, ProblemData& problem_data);
-	void ParseEdgeWeightSection(std::ifstream& file, ProblemData& problem_data);
-	void ParseNodeCoordSection(std::ifstream& file, ProblemData& problem_data);
-	void ParseDemandSection(std::ifstream& file, ProblemData& problem_data);
-	void ParseDepotSection(std::ifstream& file, ProblemData& problem_data);
+	void parseTSPFile(const std::string& _filepath, ProblemData& _problemdata);
+	void parseNodeCoordSection(std::ifstream& _file, ProblemData& _problemdata);
 };
 
