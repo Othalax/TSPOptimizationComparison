@@ -44,11 +44,6 @@ double Individual::getFitness() const
     return fitness;
 }
 
-void Individual::setFitness(double fit)
-{
-    fitness = fit;
-}
-
 std::vector<int>* Individual::getGenotype()
 {
     return &route;

@@ -14,10 +14,10 @@ public:
 
     double evaluate(Evaluator& evaluator);
     void mutate(double mutProb, std::mt19937& rng);
+	void randomize();
     std::pair<Individual*, Individual*> crossover(const Individual& other, std::mt19937& rng) const;
 
     double getFitness() const;
-    void setFitness(double fit);
     std::vector<int>* getGenotype();
 
 private:

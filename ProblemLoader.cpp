@@ -10,18 +10,6 @@ ProblemData ProblemLoader::loadProblem() {
 
     parseTSPFile(filepath, problemdata);
 
-    /*int num_customers = problem_data.getNumGroups() - 1;
-    std::vector<int> permutation;
-    permutation.reserve(num_customers);
-
-    for (int i = 2; i <= num_customers + 1; ++i) {
-        permutation.push_back(i);
-    }
-
-    std::mt19937 gen(RANDOM_PERMUTATION_SEED);
-    shuffle(permutation.begin(), permutation.end(), gen);*/
-
-
     return problemdata;
 }
 
