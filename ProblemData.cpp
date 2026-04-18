@@ -4,7 +4,9 @@
 
 ProblemData::ProblemData()
     : dimension(0),
-    edgeWeightType(""){
+    edgeWeightType("")
+{
+	calculateDistanceMatrix();
 }
 
 int ProblemData::getDimension() const
@@ -45,13 +47,8 @@ double ProblemData::calculateDistance(int i, int j) const {
     if (i == j)
         return 0.0;
     if (edgeWeightType == "EUC_2D") {
-        if (coordinates.size() != dimension)
-        {
-            return std::numeric_limits<double>::infinity();
-        }
-        double dx = coordinates[i].x - coordinates[j].x;
-        double dy = coordinates[i].y - coordinates[j].y;
-        return sqrt(dx * dx + dy * dy);
+		double distance = distanceMatrix[i][j];
+		return distance;
     }
     return std::numeric_limits<double>::infinity();
 }
@@ -59,5 +56,17 @@ double ProblemData::calculateDistance(int i, int j) const {
 bool ProblemData::isDataIncomplete()
 {
     return dimension == 0 || edgeWeightType == "" || coordinates.size() != dimension;
+}
+
+void ProblemData::calculateDistanceMatrix()
+{
+    distanceMatrix.resize(dimension, std::vector<double>(dimension, 0.0));
+    for (int i = 0; i < dimension; ++i) {
+        for (int j = i + 1; j < dimension; ++j) {
+            double dist = calculateDistance(i, j);
+            distanceMatrix[i][j] = dist;
+            distanceMatrix[j][i] = dist;
+        }
+	}
 }
 

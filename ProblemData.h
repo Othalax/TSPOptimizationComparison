@@ -30,6 +30,8 @@ private:
 	std::string name;
 	int dimension;
 	std::string edgeWeightType;
-
+	std::vector<std::vector<double>> distanceMatrix;
 	std::vector<Coordinate> coordinates;
+
+	void calculateDistanceMatrix();
 };
