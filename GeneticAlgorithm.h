@@ -14,7 +14,6 @@ public:
 private:
     void runIteration();
     int tournament();
-    void diversifyPopulation();
 
     int popSize;
     double crossProb, mutProb;
@@ -23,6 +22,5 @@ private:
     std::vector<Individual> population;
     Individual bestIndividual;
 
-    int iterationsWithoutImprovement;
     std::mt19937 rng;
 };
