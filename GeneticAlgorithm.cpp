@@ -53,13 +53,10 @@ void GeneticAlgorithm::runIteration()
         std::uniform_real_distribution<double> dist(0.0, 1.0);
         if (dist(rng) < crossProb)
         {
-            std::pair<Individual*, Individual*> children = p1.crossover(p2, rng);
-            nextGen.push_back(*children.first);
+            std::pair<Individual, Individual> children = p1.crossover(p2, rng);
+            nextGen.push_back(children.first);
             if (nextGen.size() < popSize)
-                nextGen.push_back(*children.second);
-
-            delete children.first;
-            delete children.second;
+                nextGen.push_back(children.second);
         }
         else
         {
