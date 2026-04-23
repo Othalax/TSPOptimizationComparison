@@ -36,8 +36,24 @@ double Individual::evaluate(Evaluator& evaluator)
 }
 
 // Reverse Sequence Mutation
-void Individual::mutate(double mutProb, std::mt19937& rng) {
-    std::uniform_real_distribution<double> probDist(0.0, 1.0);
+void Individual::mutate(std::mt19937& rng) {
+    int n = route.size();
+    std::vector<int> mutated(n);
+
+    std::uniform_int_distribution<int> dist(0, n - 1);
+    int start = dist(rng);
+    int end = dist(rng);
+    if (start > end) std::swap(start, end);
+
+    for (int i = 0; i < n; ++i) {
+        if (i >= start && i <= end) {
+            mutated[i] = route[start + end - i];
+        } else {
+            mutated[i] = route[i];
+        }
+    }
+
+    route = std::move(mutated);
 }
 
 void Individual::randomize()

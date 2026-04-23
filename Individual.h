@@ -15,7 +15,7 @@ public:
 
 
     double evaluate(Evaluator& evaluator);
-    void mutate(double mutProb, std::mt19937& rng);
+    void mutate(std::mt19937& rng);
 	void randomize();
 	std::pair<Individual, Individual> crossover(const Individual& other, std::mt19937& rng) const;
     //Individual crossover(const Individual& other, std::mt19937& rng) const;

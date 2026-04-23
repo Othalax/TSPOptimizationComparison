@@ -65,11 +65,13 @@ void GeneticAlgorithm::runIteration()
     }
 
     for (Individual& ind : nextGen) {
-        ind.mutate(mutProb, rng);
-        double f = ind.evaluate(evaluator);
-
-        if (f < bestIndividual.getFitness()) {
-            bestIndividual = ind;
+        std::uniform_real_distribution<double> dist(0.0, 1.0);
+        if (dist(rng) < mutProb)
+        {
+            ind.mutate(rng);
+            if (ind.evaluate(evaluator) < bestIndividual.getFitness()) {
+                bestIndividual = ind;
+            }
         }
     }
 
