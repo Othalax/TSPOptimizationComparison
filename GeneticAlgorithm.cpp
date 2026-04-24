@@ -8,10 +8,12 @@ GeneticAlgorithm::GeneticAlgorithm(int popSize, double crossProb, double mutProb
 
 void GeneticAlgorithm::initialize(int iterations)
 {
+    population.clear();
 	bestIndividual = Individual(evaluator.getSolutionSize());
 	bestIndividual.randomize();
 	bestIndividual.evaluate(evaluator);
-	population.pop_back();
+    population.push_back(bestIndividual);
+	
 	for(int i = 1; i < popSize; ++i) 
 	{
 		Individual ind(evaluator.getSolutionSize());
@@ -42,7 +44,7 @@ double GeneticAlgorithm::getBestFitness() const
 
 void GeneticAlgorithm::runIteration()
 {
-    std::vector<Individual> nextGen(popSize);
+    std::vector<Individual> nextGen;
 
     nextGen.push_back(bestIndividual);
 

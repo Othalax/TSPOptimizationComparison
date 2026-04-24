@@ -2,7 +2,7 @@
 
 
 ProblemLoader::ProblemLoader(const std::string& _filepath)
-    : filepath(filepath) {
+    : filepath(_filepath) {
 }
 
 ProblemData ProblemLoader::loadProblem() {

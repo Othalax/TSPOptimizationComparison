@@ -1,4 +1,5 @@
 #include "ProblemData.h"
+#include <iostream>
 
 
 
@@ -6,7 +7,6 @@ ProblemData::ProblemData()
     : dimension(0),
     edgeWeightType("")
 {
-	calculateDistanceMatrix();
 }
 
 int ProblemData::getDimension() const
@@ -33,6 +33,7 @@ void ProblemData::setEdgeWeightType(const std::string& _type)
 void ProblemData::setCoordinates(const std::vector<Coordinate>& _coordinates)
 {
     coordinates = _coordinates;
+    calculateDistanceMatrix();
 }
 
 void ProblemData::setName(std::string _name)
@@ -58,12 +59,14 @@ bool ProblemData::isDataIncomplete()
     return dimension == 0 || edgeWeightType == "" || coordinates.size() != dimension;
 }
 
-void ProblemData::calculateDistanceMatrix()
+void ProblemData::calculateDistanceMatrix() 
 {
     distanceMatrix.resize(dimension, std::vector<double>(dimension, 0.0));
     for (int i = 0; i < dimension; ++i) {
         for (int j = i + 1; j < dimension; ++j) {
-            double dist = calculateDistance(i, j);
+            double dx = coordinates[i].x - coordinates[j].x;
+            double dy = coordinates[i].y - coordinates[j].y;
+            double dist = sqrt(dx * dx + dy * dy);
             distanceMatrix[i][j] = dist;
             distanceMatrix[j][i] = dist;
         }

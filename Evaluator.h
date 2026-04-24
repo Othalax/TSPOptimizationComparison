@@ -20,7 +20,5 @@ public:
 private:
 	const ProblemData& problemData;
 	int dimension;
-
-	double calculateRouteCost(const std::vector<int>& _route);
 };
 
