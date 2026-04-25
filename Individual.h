@@ -19,6 +19,7 @@ public:
 	void randomize();
 	std::pair<Individual, Individual> crossover(const Individual& other, std::mt19937& rng) const;
     //Individual crossover(const Individual& other, std::mt19937& rng) const;
+	void neighborhoodSearch(Evaluator& evaluator);
 
     double getFitness() const;
     std::vector<int>* getGenotype();

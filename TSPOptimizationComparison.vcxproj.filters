@@ -30,6 +30,9 @@
     <ClInclude Include="Individual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BeesAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ProblemData.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Individual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BeesAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
