@@ -14,7 +14,7 @@ public:
 
 private:
     void runIteration();
-    void neighborhoodSearch();
+	Individual searchNeighborhood(const Individual& ind, int searchSize);
 
     int popSize;
     int numEliteSites, eliteSearchSize;
