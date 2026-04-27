@@ -40,32 +40,41 @@ void BeesAlgorithm::runIteration()
 		return a.getFitness() < b.getFitness();
 		});
 
+	std::vector<Individual> newPopulation = population;
 	for (int i = 0; i < numEliteSites; ++i) 
 	{
-		searchNeighborhood(population[i], eliteSearchSize);
+		newPopulation[i] = searchNeighborhood(population[i], eliteSearchSize);
 	}
 
 	for (int i = numEliteSites; i < numEliteSites + numSelectedSites; ++i) 
 	{
-		searchNeighborhood(population[i], selectedSearchSize);
+		newPopulation[i] = searchNeighborhood(population[i], selectedSearchSize);
 	}
 
 	for (int i = numEliteSites + numSelectedSites; i < popSize; ++i) 
 	{
-		population[i].randomize();
+		newPopulation[i].randomize();
 	}
+
+	population = std::move(newPopulation);
 }
 
 Individual BeesAlgorithm::searchNeighborhood(const Individual& ind, int searchSize)
 {
-	Individual neighbor = ind;
-	neighbor.neighborhoodSearch(evaluator);
-	if (neighbor.getFitness() < ind.getFitness())
+	Individual best = ind;
+
+	for (int k = 0; k < searchSize; ++k)
 	{
-		return neighbor;
+		Individual candidate = ind;
+		candidate.neighborhoodSearch(evaluator, rng);
+
+		if (candidate.getFitness() < best.getFitness())
+		{
+			best = candidate;
+		}
 	}
 
-	return ind;
+	return best;
 }
 
 

@@ -43,6 +43,10 @@ void Individual::mutate(std::mt19937& rng) {
     std::uniform_int_distribution<int> dist(0, n - 1);
     int start = dist(rng);
     int end = dist(rng);
+    while (start == end)
+    {
+		end = dist(rng);
+    }
     if (start > end) std::swap(start, end);
 
     for (int i = 0; i < n; ++i) {
@@ -103,6 +107,19 @@ std::pair<Individual, Individual> Individual::crossover(const Individual& other,
 	}
 
     return std::pair<Individual, Individual>(Individual(child1), Individual(child2));
+}
+
+// 2-opt Local Search
+void Individual::neighborhoodSearch(Evaluator& evaluator, std::mt19937& rng)
+{
+    std::uniform_int_distribution<int> dist(0, route.size() - 1);
+    int i = dist(rng);
+    int j = dist(rng);
+
+    if (i > j) std::swap(i, j);
+
+    std::reverse(route.begin() + i, route.begin() + j);
+	evaluate(evaluator);
 }
 
 // Edge Recombination Crossover
