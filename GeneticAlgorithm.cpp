@@ -75,9 +75,10 @@ void GeneticAlgorithm::runIteration()
         if (dist(rng) < mutProb)
         {
             ind.mutate(rng);
-            if (ind.evaluate(evaluator) < bestIndividual.getFitness()) {
-                bestIndividual = ind;
-            }
+			ind.evaluate(evaluator);
+        }
+        if (ind.getFitness() < bestIndividual.getFitness()) {
+            bestIndividual = ind;
         }
     }
 
