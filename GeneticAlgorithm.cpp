@@ -57,8 +57,12 @@ void GeneticAlgorithm::runIteration()
         {
             std::pair<Individual, Individual> children = p1.crossover(p2, rng);
             nextGen.push_back(children.first);
-            if (nextGen.size() < popSize)
-                nextGen.push_back(children.second);
+			children.first.evaluate(evaluator);
+                if (nextGen.size() < popSize)
+                {
+					children.second.evaluate(evaluator);
+                    nextGen.push_back(children.second);
+                }
         }
         else
         {
