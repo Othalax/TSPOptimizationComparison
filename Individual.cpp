@@ -35,29 +35,20 @@ double Individual::evaluate(Evaluator& evaluator)
     return fitness;
 }
 
-// Reverse Sequence Mutation
+// Partial Shuffle Mutation
 void Individual::mutate(std::mt19937& rng) {
-    int n = route.size();
-    std::vector<int> mutated(n);
+    if (route.size() < 2) return;
 
-    std::uniform_int_distribution<int> dist(0, n - 1);
+    std::uniform_int_distribution<int> dist(0, route.size() - 1);
     int start = dist(rng);
     int end = dist(rng);
     while (start == end)
     {
-		end = dist(rng);
+        end = dist(rng);
     }
     if (start > end) std::swap(start, end);
 
-    for (int i = 0; i < n; ++i) {
-        if (i >= start && i <= end) {
-            mutated[i] = route[start + end - i];
-        } else {
-            mutated[i] = route[i];
-        }
-    }
-
-    route = std::move(mutated);
+    std::shuffle(route.begin() + start, route.begin() + end + 1, rng);
 }
 
 void Individual::randomize()
