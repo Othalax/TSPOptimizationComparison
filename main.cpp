@@ -14,7 +14,7 @@ int main()
 	int iterations = 1000;
 	GeneticAlgorithm ga(popSize, crossProb, mutProb, evaluator);
 	ga.initialize(iterations);
-	std::vector<int>* best_solution = ga.getBest();
+	const std::vector<int>* best_solution = ga.getBest();
 	double best_fitness = ga.getBestFitness();
 	std::cout << "final best fitness: " << best_fitness << std::endl;
 	std::cout << "best solution: ";

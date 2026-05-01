@@ -7,12 +7,12 @@ Individual::Individual()
 }
 
 Individual::Individual(int size)
-    : route(size), fitness(-1.0)
+    : route(size), fitness(std::numeric_limits<double>::infinity())
 {
 }
 
 Individual::Individual(std::vector<int> route)
-	: route(std::move(route)), fitness(-1.0)
+	: route(std::move(route)), fitness(std::numeric_limits<double>::infinity())
 {
 }
 
@@ -208,7 +208,7 @@ double Individual::getFitness() const
     return fitness;
 }
 
-std::vector<int>* Individual::getGenotype()
+const std::vector<int>* Individual::getGenotype()
 {
     return &route;
 }

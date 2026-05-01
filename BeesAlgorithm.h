@@ -9,7 +9,7 @@ public:
                   int selectedSearchSize, Evaluator& evaluator);
 
     void initialize(int iterations);
-    std::vector<int>* getBest();
+    const std::vector<int>* getBest();
     double getBestFitness() const;
 
 private:

@@ -22,7 +22,7 @@ public:
 	void neighborhoodSearch(Evaluator& evaluator, std::mt19937& rng);
 
     double getFitness() const;
-    std::vector<int>* getGenotype();
+    const std::vector<int>* getGenotype();
 
 private:
 

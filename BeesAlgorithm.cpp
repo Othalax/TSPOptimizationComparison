@@ -24,7 +24,7 @@ void BeesAlgorithm::initialize(int iterations)
 	
 }
 
-std::vector<int>* BeesAlgorithm::getBest()
+const std::vector<int>* BeesAlgorithm::getBest()
 {
 	return population[0].getGenotype();
 }

@@ -2,7 +2,7 @@
 
 GeneticAlgorithm::GeneticAlgorithm(int popSize, double crossProb, double mutProb, Evaluator& evaluator)
 	: popSize(popSize), crossProb(crossProb), mutProb(mutProb), 
-	evaluator(evaluator) 
+	evaluator(evaluator), rng(std::random_device{}())
 {
 }
 
@@ -32,7 +32,7 @@ void GeneticAlgorithm::initialize(int iterations)
 	}
 }
 
-std::vector<int>* GeneticAlgorithm::getBest()
+const std::vector<int>* GeneticAlgorithm::getBest()
 {
 	return bestIndividual.getGenotype();
 }
@@ -56,8 +56,8 @@ void GeneticAlgorithm::runIteration()
         if (dist(rng) < crossProb)
         {
             std::pair<Individual, Individual> children = p1.crossover(p2, rng);
-            nextGen.push_back(children.first);
 			children.first.evaluate(evaluator);
+            nextGen.push_back(children.first);
                 if (nextGen.size() < popSize)
                 {
 					children.second.evaluate(evaluator);
