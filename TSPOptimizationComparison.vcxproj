@@ -126,6 +126,7 @@
     <ClInclude Include="BeesAlgorithm.h" />
     <ClInclude Include="Evaluator.h" />
     <ClInclude Include="GeneticAlgorithm.h" />
+    <ClInclude Include="HybridAlgorithm.h" />
     <ClInclude Include="Individual.h" />
     <ClInclude Include="ProblemData.h" />
     <ClInclude Include="ProblemLoader.h" />
@@ -134,6 +135,7 @@
     <ClCompile Include="BeesAlgorithm.cpp" />
     <ClCompile Include="Evaluator.cpp" />
     <ClCompile Include="GeneticAlgorithm.cpp" />
+    <ClCompile Include="HybridAlgorithm.cpp" />
     <ClCompile Include="Individual.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProblemData.cpp" />

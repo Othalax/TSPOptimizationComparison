@@ -17,6 +17,11 @@ void BeesAlgorithm::initialize(int iterations)
 		ind.randomize();
 		population.push_back(ind);
 	}
+
+	std::sort(population.begin(), population.end(), [](const Individual& a, const Individual& b) {
+		return a.getFitness() < b.getFitness();
+		});
+
 	for (int i =0; i < iterations; ++i) 
 	{
 		runIteration();
@@ -36,10 +41,6 @@ double BeesAlgorithm::getBestFitness() const
 
 void BeesAlgorithm::runIteration()
 {
-	std::sort(population.begin(), population.end(), [](const Individual& a, const Individual& b) {
-		return a.getFitness() < b.getFitness();
-		});
-
 	std::vector<Individual> newPopulation = population;
 	for (int i = 0; i < numEliteSites; ++i) 
 	{
@@ -57,6 +58,10 @@ void BeesAlgorithm::runIteration()
 	}
 
 	population = std::move(newPopulation);
+
+	std::sort(population.begin(), population.end(), [](const Individual& a, const Individual& b) {
+		return a.getFitness() < b.getFitness();
+		});
 }
 
 Individual BeesAlgorithm::searchNeighborhood(const Individual& ind, int searchSize)
