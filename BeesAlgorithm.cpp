@@ -68,7 +68,7 @@ Individual BeesAlgorithm::searchNeighborhood(const Individual& ind, int searchSi
 {
 	Individual best = ind;
 
-	for (int k = 0; k < searchSize; ++k)
+	for (int i = 0; i < searchSize; ++i)
 	{
 		Individual candidate = ind;
 		candidate.neighborhoodSearch(evaluator, rng);
