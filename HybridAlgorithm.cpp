@@ -42,9 +42,76 @@ double HybridAlgorithm::getBestFitness() const
 
 void HybridAlgorithm::runIteration()
 {
-	std::vector<Individual> newPopulation;
-	newPopulation.push_back(population[0]);
+	std::vector<Individual> newPopulation = population;
+	Individual bestInd = population[0];
+	for (int i = 0; i < numEliteSites; ++i)
+	{
+		newPopulation[i] = searchNeighborhood(population[i], eliteSearchSize);
+		if (newPopulation[i].getFitness() < bestInd.getFitness())
+		{
+			bestInd = newPopulation[i];
+		}
+	}
 
+	for (int i = numEliteSites; i < numEliteSites + numSelectedSites; ++i)
+	{
+		newPopulation[i] = searchNeighborhood(population[i], selectedSearchSize);
+		if (newPopulation[i].getFitness() < bestInd.getFitness())
+		{
+			bestInd = newPopulation[i];
+		}
+	}
+
+	for (int i = numEliteSites + numSelectedSites; i < popSize; ++i)
+	{
+		newPopulation[i].randomize();
+		if (newPopulation[i].getFitness() < bestInd.getFitness())
+		{
+			bestInd = newPopulation[i];
+		}
+	}
+
+	population = std::move(newPopulation);
+	std::vector<Individual> nextGen;
+
+	nextGen.push_back(bestInd);
+
+	while (nextGen.size() < popSize) {
+		Individual& p1 = population[tournament()];
+		Individual& p2 = population[tournament()];
+
+		std::uniform_real_distribution<double> dist(0.0, 1.0);
+		if (dist(rng) < crossProb)
+		{
+			std::pair<Individual, Individual> children = p1.crossover(p2, rng);
+			children.first.evaluate(evaluator);
+			nextGen.push_back(children.first);
+			if (nextGen.size() < popSize)
+			{
+				children.second.evaluate(evaluator);
+				nextGen.push_back(children.second);
+			}
+		}
+		else
+		{
+			nextGen.push_back(p1);
+		}
+	}
+
+	for (Individual& ind : nextGen) {
+		std::uniform_real_distribution<double> dist(0.0, 1.0);
+		if (dist(rng) < mutProb)
+		{
+			ind.mutate(rng);
+			ind.evaluate(evaluator);
+		}
+	}
+
+	population = std::move(nextGen);
+
+	std::sort(population.begin(), population.end(), [](const Individual& a, const Individual& b) {
+		return a.getFitness() < b.getFitness();
+		});
 
 }
 
