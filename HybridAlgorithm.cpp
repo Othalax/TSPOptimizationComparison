@@ -2,11 +2,11 @@
 
 HybridAlgorithm::HybridAlgorithm(int popSize, double crossProb, double mutProb, 
 								 int numEliteSites, int eliteSearchSize, int numSelectedSites,
-								 int selectedSearchSize, Evaluator& evaluator)
+								 int selectedSearchSize, Evaluator& evaluator, int seed)
 	: popSize(popSize), crossProb(crossProb), mutProb(mutProb),
 	  numEliteSites(numEliteSites), eliteSearchSize(eliteSearchSize),
 	  numSelectedSites(numSelectedSites), selectedSearchSize(selectedSearchSize),
-	  evaluator(evaluator), rng(std::random_device{}())
+	  evaluator(evaluator), rng(seed)
 {
 }
 
@@ -15,7 +15,7 @@ void HybridAlgorithm::initialize(int iterations)
 	for (int i = 0; i < popSize; i++)
 	{
 		Individual ind(evaluator.getSolutionSize());
-		ind.randomize();
+		ind.randomize(rng);
 		ind.evaluate(evaluator);
 		population.push_back(ind);
 	}
@@ -64,8 +64,8 @@ void HybridAlgorithm::runIteration()
 
 	for (int i = numEliteSites + numSelectedSites; i < popSize; ++i)
 	{
-		newPopulation[i].randomize();
-		if (newPopulation[i].getFitness() < bestInd.getFitness())
+		newPopulation[i].randomize(rng);
+		if (newPopulation[i].evaluate(evaluator) < bestInd.getFitness())
 		{
 			bestInd = newPopulation[i];
 		}

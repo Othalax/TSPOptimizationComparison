@@ -9,12 +9,13 @@ int main()
 	ProblemLoader problem_loader(filepath);
 	ProblemData problem_data = problem_loader.loadProblem();
 	Evaluator evaluator(problem_data, problem_data.getDimension());
+	int seed = 42;
 
 	//int popSize = 100;
 	double crossProb = 0.5;
 	double mutProb = 0.15;
 	//int iterations = 1000;
-	/*GeneticAlgorithm ga(popSize, crossProb, mutProb, evaluator);
+	/*GeneticAlgorithm ga(popSize, crossProb, mutProb, evaluator, seed);
 	ga.initialize(iterations);
 	const std::vector<int>* best_solution = ga.getBest();
 	double best_fitness = ga.getBestFitness();
@@ -30,7 +31,7 @@ int main()
 	int numSelectedSites = 20;
 	int selectedSearchSize = 10;
 	int iterations = 1000;
-	/*BeesAlgorithm ba(popSize, numEliteSites, eliteSearchSize, numSelectedSites, selectedSearchSize, evaluator);
+	/*BeesAlgorithm ba(popSize, numEliteSites, eliteSearchSize, numSelectedSites, selectedSearchSize, evaluator, seed);
 	ba.initialize(iterations);
 	const std::vector<int>* best_solution = ba.getBest();
 	double best_fitness = ba.getBestFitness();
@@ -40,7 +41,7 @@ int main()
 		std::cout << gene << " ";
 	}*/
 
-	HybridAlgorithm ha(popSize, crossProb, mutProb, numEliteSites, eliteSearchSize, numSelectedSites, selectedSearchSize, evaluator);
+	HybridAlgorithm ha(popSize, crossProb, mutProb, numEliteSites, eliteSearchSize, numSelectedSites, selectedSearchSize, evaluator, seed);
 	ha.initialize(iterations);
 	const std::vector<int>* best_solution = ha.getBest();
 	double best_fitness = ha.getBestFitness();

@@ -6,7 +6,7 @@ class BeesAlgorithm
 {
 public:
     BeesAlgorithm(int popSize, int numEliteSites, int eliteSearchSize, int numSelectedSites, 
-                  int selectedSearchSize, Evaluator& evaluator);
+                  int selectedSearchSize, Evaluator& evaluator, int seed);
 
     void initialize(int iterations);
     const std::vector<int>* getBest();

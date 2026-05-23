@@ -1,8 +1,9 @@
 #include "GeneticAlgorithm.h"
 
-GeneticAlgorithm::GeneticAlgorithm(int popSize, double crossProb, double mutProb, Evaluator& evaluator)
+GeneticAlgorithm::GeneticAlgorithm(int popSize, double crossProb, double mutProb,
+                                   Evaluator& evaluator, int seed)
 	: popSize(popSize), crossProb(crossProb), mutProb(mutProb), 
-	evaluator(evaluator), rng(std::random_device{}())
+	evaluator(evaluator), rng(seed)
 {
 }
 
@@ -10,14 +11,14 @@ void GeneticAlgorithm::initialize(int iterations)
 {
     population.clear();
 	bestIndividual = Individual(evaluator.getSolutionSize());
-	bestIndividual.randomize();
+	bestIndividual.randomize(rng);
 	bestIndividual.evaluate(evaluator);
     population.push_back(bestIndividual);
 	
 	for(int i = 1; i < popSize; ++i) 
 	{
 		Individual ind(evaluator.getSolutionSize());
-		ind.randomize();
+		ind.randomize(rng);
 		population.push_back(ind);
 
 		if (population[i].evaluate(evaluator) < bestIndividual.getFitness())

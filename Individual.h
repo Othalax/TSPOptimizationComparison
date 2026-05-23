@@ -16,7 +16,7 @@ public:
 
     double evaluate(Evaluator& evaluator);
     void mutate(std::mt19937& rng);
-	void randomize();
+	void randomize(std::mt19937& rng);
 	std::pair<Individual, Individual> crossover(const Individual& other, std::mt19937& rng) const;
     //Individual crossover(const Individual& other, std::mt19937& rng) const;
 	void neighborhoodSearch(Evaluator& evaluator, std::mt19937& rng);

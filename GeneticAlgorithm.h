@@ -5,7 +5,7 @@
 
 class GeneticAlgorithm {
 public:
-    GeneticAlgorithm(int popSize, double crossProb, double mutProb, Evaluator& evaluator);
+    GeneticAlgorithm(int popSize, double crossProb, double mutProb, Evaluator& evaluator, int seed);
 
     void initialize(int iterations);
     const std::vector<int>* getBest();

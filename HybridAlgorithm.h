@@ -8,7 +8,7 @@ class HybridAlgorithm
 public:
     HybridAlgorithm(int popSize, double crossProb, double mutProb, 
                     int numEliteSites, int eliteSearchSize, int numSelectedSites,
-                    int selectedSearchSize, Evaluator& evaluator);
+                    int selectedSearchSize, Evaluator& evaluator, int seed);
 
     void initialize(int iterations);
     const std::vector<int>* getBest();

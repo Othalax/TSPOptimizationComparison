@@ -1,10 +1,10 @@
 #include "BeesAlgorithm.h"
 
 BeesAlgorithm::BeesAlgorithm(int popSize, int numEliteSites, int eliteSearchSize, int numSelectedSites,
-    int selectedSearchSize, Evaluator& evaluator) 
+							int selectedSearchSize, Evaluator& evaluator, int seed) 
 	: popSize(popSize), numEliteSites(numEliteSites), eliteSearchSize(eliteSearchSize), 
 	numSelectedSites(numSelectedSites), selectedSearchSize(selectedSearchSize), 
-	evaluator(evaluator)
+	evaluator(evaluator), rng(seed)
 {
 }
 
@@ -14,7 +14,7 @@ void BeesAlgorithm::initialize(int iterations)
 	for (int i = 0; i < popSize; ++i) 
 	{
 		Individual ind(evaluator.getSolutionSize());
-		ind.randomize();
+		ind.randomize(rng);
 		population.push_back(ind);
 	}
 
@@ -54,7 +54,8 @@ void BeesAlgorithm::runIteration()
 
 	for (int i = numEliteSites + numSelectedSites; i < popSize; ++i) 
 	{
-		newPopulation[i].randomize();
+		newPopulation[i].randomize(rng);
+		newPopulation[i].evaluate(evaluator);
 	}
 
 	population = std::move(newPopulation);

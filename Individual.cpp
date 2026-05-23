@@ -51,13 +51,13 @@ void Individual::mutate(std::mt19937& rng) {
     std::shuffle(route.begin() + start, route.begin() + end + 1, rng);
 }
 
-void Individual::randomize()
+void Individual::randomize(std::mt19937& rng)
 {
     int n = route.size();
     for (int i = 0; i < n; ++i) {
         route[i] = i;
     }
-	std::shuffle(route.begin(), route.end(), std::mt19937(std::random_device()()));
+	std::shuffle(route.begin(), route.end(), rng);
 }
 
 // Ordered Crossover
