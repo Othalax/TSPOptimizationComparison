@@ -98,12 +98,12 @@ void HybridAlgorithm::runIteration()
 		}
 	}
 
-	for (Individual& ind : nextGen) {
+	for (int i = 1; i < nextGen.size(); ++i) {
 		std::uniform_real_distribution<double> dist(0.0, 1.0);
 		if (dist(rng) < mutProb)
 		{
-			ind.mutate(rng);
-			ind.evaluate(evaluator);
+			nextGen[i].mutate(rng);
+			nextGen[i].evaluate(evaluator);
 		}
 	}
 
