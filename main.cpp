@@ -1,45 +1,41 @@
-#include "GeneticAlgorithm.h"
 #include "ProblemLoader.h"
-#include "BeesAlgorithm.h"
-#include "HybridAlgorithm.h"
+#include "Result.h"
 
 int main()
 {
-	std::string filepath = "data/eil51.tsp";
+	std::string filepath = "data/eil101.tsp";
 	ProblemLoader problem_loader(filepath);
 	ProblemData problem_data = problem_loader.loadProblem();
 	Evaluator evaluator(problem_data, problem_data.getDimension());
-	int seed = std::random_device{}();
+	
+	// Genetic algorithm parameters
+	int GApopsize = 100;
+	double GAcrossprob = 0.7;
+	double GAmutprob = 0.2;
+	int GAinterations = 1000;
 
-	//int popSize = 100;
-	double crossProb = 0.5;
-	double mutProb = 0.05;
-	//int iterations = 1000;
-	/*GeneticAlgorithm ga(popSize, crossProb, mutProb, evaluator, seed);
-	ga.initialize(iterations);
-	const std::vector<int>* best_solution = ga.getBest();
-	double best_fitness = ga.getBestFitness();
-	std::cout << "final best fitness: " << best_fitness << std::endl;
-	std::cout << "best solution: ";
-	for (int gene : *best_solution) {
-		std::cout << gene << " ";
-	}*/
+	// Bees algorithm parameters
+	int BApopSize = 100;
+	int BAnumEliteSites = 10;
+	int BAeliteSearchSize = 50;
+	int BAnumSelectedSites = 30;
+	int BAselectedSearchSize = 10;
+	int BAinterations = 1000;
 
-	int popSize = 100;
-	int numEliteSites = 5;
-	int eliteSearchSize = 30;
-	int numSelectedSites = 30;
-	int selectedSearchSize = 10;
-	int iterations = 1000;
-	BeesAlgorithm ba(popSize, numEliteSites, eliteSearchSize, numSelectedSites, selectedSearchSize, evaluator, seed);
-	ba.initialize(iterations);
-	double best_fitnessb = ba.getBestFitness();
-	std::cout << "final best fitness: " << best_fitnessb << std::endl;
+	// Hybrid algorithm parameters
+	int HApopsize = 100;
+	double HAcrossprob = 0.25;
+	double HAmutprob = 0.05;
+	int HAnumEliteSites = 10;
+	int HAeliteSearchSize = 50;
+	int HAnumSelectedSites = 30;
+	int HAselectedSearchSize = 10;
+	int HAiterations = 1000;
 
-	HybridAlgorithm ha(popSize, crossProb, mutProb, numEliteSites, eliteSearchSize, numSelectedSites, selectedSearchSize, evaluator, seed);
-	ha.initialize(iterations);
-	double best_fitness = ha.getBestFitness();
-	std::cout << "final best fitness: " << best_fitness << std::endl;
-	std::cout << std::endl;
+	Result result(evaluator, GApopsize, GAcrossprob, GAmutprob, GAinterations, BApopSize, BAnumEliteSites, BAeliteSearchSize, BAnumSelectedSites,
+					BAselectedSearchSize, BAinterations, HApopsize, HAcrossprob, HAmutprob, HAnumEliteSites, HAeliteSearchSize, HAnumSelectedSites,
+					HAselectedSearchSize, HAiterations);
+	result.runAlgorithms(30);
 
+	return 0;
 }

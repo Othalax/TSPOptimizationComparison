@@ -130,6 +130,7 @@
     <ClInclude Include="Individual.h" />
     <ClInclude Include="ProblemData.h" />
     <ClInclude Include="ProblemLoader.h" />
+    <ClInclude Include="Result.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BeesAlgorithm.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProblemData.cpp" />
     <ClCompile Include="ProblemLoader.cpp" />
+    <ClCompile Include="Result.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
