@@ -42,7 +42,7 @@ void Result::runAlgorithms(int seednum)
 
 	for (int i = 1; i <= seednum; i++)
 	{
-		BeesAlgorithm ba(BApopSize, BAnumEliteSites, BAeliteSearchSize, BAnumSelectedSites, BAselectedSearchSize, evaluator, seednum);
+		BeesAlgorithm ba(BApopSize, BAnumEliteSites, BAeliteSearchSize, BAnumSelectedSites, BAselectedSearchSize, evaluator, i);
 		auto startTime = std::chrono::high_resolution_clock::now();
 
 		ba.initialize(BAinterations);
@@ -60,7 +60,7 @@ void Result::runAlgorithms(int seednum)
 
 	for (int i = 1; i <= seednum; i++)
 	{
-		HybridAlgorithm ha(HApopsize, HAcrossprob, HAmutprob, HAnumEliteSites, HAeliteSearchSize, HAnumSelectedSites, HAselectedSearchSize, evaluator, seednum);
+		HybridAlgorithm ha(HApopsize, HAcrossprob, HAmutprob, HAnumEliteSites, HAeliteSearchSize, HAnumSelectedSites, HAselectedSearchSize, evaluator, i);
 		auto startTime = std::chrono::high_resolution_clock::now();
 
 		ha.initialize(HAiterations);
